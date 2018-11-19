@@ -3,7 +3,7 @@ var app = require('../routes');
 var debug = require('debug')('demo:server');
 var http = require('http');
 const { logger, eLogger } = require("../common/logger");
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '9000');
 var server = http.createServer(app.callback());
 server.listen(port);
 server.on('error', onError);
