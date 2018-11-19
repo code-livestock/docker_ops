@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node bin/claim.js",
+    "start": "node bin/run.js",
     "dev": "./node_modules/.bin/nodemon bin/claim",
     "prd": "pm2 start bin/claim",
     "test": "echo \"Error: no test specified\" && exit 1"
