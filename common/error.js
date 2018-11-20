@@ -7,10 +7,9 @@ const error = {
     CreateSuccess: "创建成功",
     DeleteSuccess: "删除成功",
     UpdateSuccess: "更新成功",
-    StatusCode: 200
+    StatusCode: 200,
+    ErrorCode:400,
+    ValidateCode:422
 
-}
-const code = {
-    Success: 200
 }
 module.exports = error;

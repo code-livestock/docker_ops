@@ -12,7 +12,6 @@ app.use(async (ctx, next) => {
     } catch (err) {
         ctx.status = err.status || 500;
         ctx.body = {
-            errcode: 0,
             errmsg: err.message
         }
     }
