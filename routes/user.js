@@ -4,7 +4,6 @@ const _ = require('lodash');
 const snowflake = require("../common/snowflake");
 const error = require("../common/error");
 const querystring = require("querystring");
-// router.prefix('/test');
 router.post("/users", async ctx => {
   let params = ctx.request.body;
   if (_.isEmpty(params.username)) { ctx.throw(error.ValidateCode, error.UsernameNotNull) };
