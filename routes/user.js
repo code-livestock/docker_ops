@@ -3,11 +3,10 @@ const model = require("../model/index")
 const _ = require('lodash');
 const snowflake = require("../common/snowflake");
 const error = require("../common/error");
-const querystring = require("querystring");
 router.post("/users", async ctx => {
   let params = ctx.request.body;
-  if (_.isEmpty(params.username)) { ctx.throw(error.ValidateCode, error.UsernameNotNull) };
-  if (_.isEmpty(params.password)) { ctx.throw(error.ValidateCode, error.PasswdNotNull) };
+  if (!params.username) { ctx.throw(error.ValidateCode, error.UsernameNotNull) };
+  if (!params.password) { ctx.throw(error.ValidateCode, error.PasswdNotNull) };
   let user = await model.findOne("User", { username: params.username });
   if (!_.isEmpty(user)) { ctx.throw(error.ValidateCode, error.UsernameExist) };
   params.create_time = new Date();
@@ -51,4 +50,4 @@ router.get("/users", async ctx => {
     results: data
   }
 })
-module.exports = router;
+module.exports = exports = router;
