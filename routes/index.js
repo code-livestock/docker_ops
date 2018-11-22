@@ -4,7 +4,9 @@ const app = new Koa();
 const user = require("./user");
 const helmet = require("koa-helmet");
 const cors = require("koa2-cors");
-app.use(cors());
+app.use(cors({
+	"exposeHeaders":["X-Total"]
+}));
 app.use(helmet());
 app.use(bodyparser({
     enableTypes: ['json', 'form', 'text']

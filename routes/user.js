@@ -5,6 +5,8 @@ const snowflake = require("../common/snowflake");
 const error = require("../common/error");
 router.post("/users", async ctx => {
   let params = ctx.request.body;
+  console.log(typeof params);
+  console.log(params);
   if (!params.username) { ctx.throw(error.ValidateCode, error.UsernameNotNull) };
   if (!params.password) { ctx.throw(error.ValidateCode, error.PasswdNotNull) };
   let user = await model.findOne("User", { username: params.username });
@@ -37,11 +39,15 @@ router.put("/users/:user_id", async ctx => {
   }
 });
 router.get("/users", async ctx => {
-  let params = ctx.request.query;
+  let params = ctx.query;
   let options = {};
-  options.offset = params.start || 0;
-  options.limit = params.length || 10;
-  options.where = params;
+  options.offset = Number(params.start)|| 0;
+  options.limit = Number(params.length)|| 10;
+  let where =_.omit(params,["start","length"]);
+  if(!_.isEmpty(where)){
+    options.where = where;
+  }
+  console.log(options);
   let result = await model.findAndCount("User", options);
   let data = result.rows;
   let total = result.count;
