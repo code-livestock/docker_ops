@@ -5,6 +5,7 @@ const user = require("./user");
 const helmet = require("koa-helmet");
 const cors = require("koa2-cors");
 app.use(cors({
+    "allowMethods":['POST','DELETE','PUT','GET'],
 	"exposeHeaders":["X-Total"]
 }));
 app.use(helmet());

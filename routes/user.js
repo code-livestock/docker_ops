@@ -28,10 +28,11 @@ router.delete("/users/:user_id", async ctx => {
 router.put("/users/:user_id", async ctx => {
   let user_id = ctx.params.user_id;
   let params = ctx.request.body;
+  let updateParams = _.omit(params,["id"]);
   params.update_time = new Date();
   let user = await model.findById("User", user_id);
   if (_.isEmpty(user)) { ctx.throw(error.ValidateCode, error.IdNotExist) };
-  await model.update("User", params, { id: user_id });
+  await model.update("User", updateParams, { id: user_id });
   ctx.body = {
     errmsg: error.UpdateSuccess
   }
