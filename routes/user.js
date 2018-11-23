@@ -5,8 +5,6 @@ const snowflake = require("../common/snowflake");
 const error = require("../common/error");
 router.post("/users", async ctx => {
   let params = ctx.request.body;
-  console.log(typeof params);
-  console.log(params);
   if (!params.username) { ctx.throw(error.ValidateCode, error.UsernameNotNull) };
   if (!params.password) { ctx.throw(error.ValidateCode, error.PasswdNotNull) };
   let user = await model.findOne("User", { username: params.username });
@@ -47,7 +45,6 @@ router.get("/users", async ctx => {
   if(!_.isEmpty(where)){
     options.where = where;
   }
-  console.log(options);
   let result = await model.findAndCount("User", options);
   let data = result.rows;
   let total = result.count;
