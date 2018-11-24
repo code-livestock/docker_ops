@@ -31,7 +31,9 @@ router.put("/users/:user_id", async ctx => {
   let updateParams = _.omit(params,["id"]);
   params.update_time = new Date();
   let user = await model.findById("User", user_id);
-  if (_.isEmpty(user)) { ctx.throw(error.ValidateCode, error.IdNotExist) };
+  if(_.isEmpty(user)) { ctx.throw(error.ValidateCode, error.IdNotExist) };
+  let existUser = await model.findOne("User", {username:params.username});
+  if(!_.isEmpty(existUser)&&existUser.id!=user_id){ ctx.throw(error.ValidateCode,error.UsernameExist)};
   await model.update("User", updateParams, { id: user_id });
   ctx.body = {
     errmsg: error.UpdateSuccess
